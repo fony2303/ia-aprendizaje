@@ -1,6 +1,6 @@
 # Prompts reutilizables para gestión de un gimnasio
 
-Primera pieza del portfolio del curso de IA generativa. Son cinco prompts, uno por tipo de tarea (redactar, analizar, resumir, planificar y revisar). Para cada uno incluyo la versión vaga, la versión mejorada y qué cambia entre ambas.
+Primera pieza del portfolio del curso de IA generativa. Son cinco prompts, uno por tipo de tarea (redactar, analizar, resumir, planificar y revisar). Para cada uno incluyo la versión vaga, la versión mejorada, qué cambia entre ambas y el resultado de la prueba.
 
 Los datos entre corchetes son marcadores: se sustituyen por los datos reales antes de usar el prompt.
 
@@ -37,8 +37,9 @@ Los datos entre corchetes son marcadores: se sustituyen por los datos reales ant
 
 **Prueba**
 
-- **Versión vaga** (*"Escribe un post para redes sobre mi gimnasio."*): el post no menciona los eventos de noviembre y añade afirmaciones sobre instalaciones y atención que no se le dieron. Usa tres emojis, seis hashtags y no termina con una pregunta.
+- **Versión vaga:** el post no menciona los eventos de noviembre y añade afirmaciones sobre instalaciones y atención que no se le dieron. Usa tres emojis, seis hashtags y no termina con una pregunta.
 - **Versión mejorada:** anuncia los tres eventos con fecha, hora y trainer, usa un emoji, termina con una pregunta y no añade datos inventados. Cumple las 80 palabras aproximadas.
+
 ---
 
 ## 2. Analizar: KPI de trabajadoras
@@ -49,10 +50,12 @@ Los datos entre corchetes son marcadores: se sustituyen por los datos reales ant
 
 **Versión mejorada**
 
-> Actúa como responsable de operaciones de un gimnasio. Te pego a continuación una tabla con los datos de ventas y KPI de mis trabajadoras, del [fecha inicio] al [fecha fin], con las columnas: fecha, trabajadora, servicio, número de ventas, importe y [otros KPI].
+> Actúa como responsable de operaciones de un gimnasio. Te pego a continuación una tabla con los datos de ventas y KPI de mis trabajadoras, del [fecha inicio] al [fecha fin], con las columnas: fecha, trabajadora, servicio, número de ventas, importe y [otros KPI]. "Plan amigo" significa número de altas con un amigo.
+>
+> Antes de analizar, dime si falta alguna de las columnas indicadas.
 >
 > Haz lo siguiente:
-> 1. Agrupa los datos por trabajadora y por servicio. Calcula totales y medias por trabajadora.
+> 1. Agrupa los datos por trabajadora y por servicio. Calcula totales y medias por trabajadora, y muestra el cálculo de cada media antes del resultado.
 > 2. Compara a cada trabajadora con la media del equipo. Usa solo los datos de la tabla; si falta un dato, dilo y no lo estimes.
 > 3. Para cada trabajadora, escribe dos listas: qué ha hecho bien y qué focos mejorar. Cada punto debe citar una cifra concreta.
 >
@@ -61,10 +64,15 @@ Los datos entre corchetes son marcadores: se sustituyen por los datos reales ant
 **Qué cambia**
 
 - El modelo conoce las columnas y el periodo, así que sabe qué calcular.
-- Los pasos están numerados y se pueden comprobar uno a uno.
+- Avisa de los datos que faltan antes de empezar, en lugar de depender de que lo haga por iniciativa propia.
+- Muestra el cálculo de las medias, así puedes comprobarlas.
 - Cada conclusión tiene una cifra, lo que facilita verificar el análisis.
 
-**Prueba:** pendiente, con una tabla ficticia de 3 trabajadoras y 2 semanas.
+**Prueba** (con la tabla ficticia de Liss, Bea y Nei, del 9 al 15 de noviembre)
+
+- **Versión vaga:** calcula bien los totales y las medias por trabajadora. Se equivoca en la media de NPS de Nei (8,2 en vez de 8,06). No avisa de que falta la columna de servicio.
+- **Versión mejorada (versión anterior al cambio):** calcula bien los totales. Tiene el mismo fallo en la media de Nei. Avisa de que no hay columna de servicio y no inventa el NPS del domingo de Bea.
+- **Pendiente:** repetir con el prompt ya actualizado para comprobar si el cálculo de medias mejora.
 
 ---
 
@@ -84,15 +92,19 @@ Los datos entre corchetes son marcadores: se sustituyen por los datos reales ant
 > 3. Para las reseñas de una o dos estrellas, explica las quejas principales.
 > 4. Propón un plan de mejora. Usa solo quejas que aparezcan en al menos dos reseñas, y para cada una, una acción concreta y medible.
 >
-> No deduzcas problemas que no aparezcan en el texto.
+> No deduzcas problemas que no aparezcan en el texto. No inventes objetivos ni metas que no te he dado.
 
 **Qué cambia**
 
 - El modelo declara su base de análisis antes de sacar conclusiones.
 - Un tema que aparece una sola vez no se convierte en un problema general.
 - El plan es verificable porque cada acción responde a una queja concreta.
+- No inventa objetivos numéricos que no aparezcan en los datos.
 
-**Prueba:** pendiente, con 5 o 6 reseñas reales sin nombres de autor.
+**Prueba** (con 8 reseñas ficticias, del 2 al 8 de noviembre)
+
+- **Versión vaga:** agrupa las quejas en tres temas y da la media (3,0), que es correcta. Dice que dos de las tres reseñas sobre colas tienen 1 o 2 estrellas, cuando son las tres. No cuenta las frecuencias de forma explícita y no propone plan.
+- **Versión mejorada:** las cifras son correctas (8 reseñas, media 3,0, cuatro reseñas de 1 o 2 estrellas con media 1,75). Cuenta las frecuencias en una tabla con los números de reseña. Deja fuera la queja aislada sobre la música, como pedía el prompt. Tiene dos fallos menores: habla de "la cliente" sin que se diga, y propone un objetivo de "no supere 5 minutos" que no sale de los datos. Por eso se añadió la última frase del prompt.
 
 ---
 
@@ -129,7 +141,10 @@ Los datos entre corchetes son marcadores: se sustituyen por los datos reales ant
 - Las reglas son comprobables: un trainer con dos clases a la misma hora es un error visible.
 - Pedir la lista de conflictos evita que un plan incompleto parezca completo.
 
-**Prueba:** pendiente, con tres clases y dos trainers ficticios.
+**Prueba** (con tres clases y tres trainers ficticios, semana del 16 al 22 de noviembre)
+
+- **Versión vaga:** inventó clases (Pilates con aro, Bodycombat, un Maratón de Ritmo), un trainer que no existe en los datos (José) y horarios fuera de las franjas disponibles. Ignoró salas y aforos y añadió secciones que no pidió.
+- **Versión mejorada:** usó solo las clases y los trainers dados, con su sala y aforo. Respetó las franjas, no hubo solapamientos y quedaron libres de jueves a domingo. Listó los huecos que no podía resolver sin preguntar: horas de inicio, reparto de días, frecuencia y horario de apertura.
 
 ---
 
@@ -153,8 +168,9 @@ Los datos entre corchetes son marcadores: se sustituyen por los datos reales ant
 > 2. ¿Responde al objetivo del cliente que te he indicado?
 > 3. ¿Hay promesas que no se pueden garantizar (resultados exactos, plazos)? Señálalas.
 > 4. ¿Tiene una llamada a la acción clara?
+> 5. ¿Incluye datos de confianza: titulación de quien atiende al cliente, condiciones de cancelación y un canal de contacto concreto? Señala los que falten.
 >
-> Devuélveme: una lista de problemas por criterio, citando la frase exacta del texto, y una versión corregida de máximo 150 palabras. No inventes precios, servicios ni resultados que no aparezcan en el texto o en los datos que te he dado.
+> Devuélveme: una lista de problemas por criterio, citando la frase exacta del texto, y una versión corregida de máximo 150 palabras. No inventes precios, servicios ni resultados que no aparezcan en el texto o en los datos que te he dado. Si falta un dato para evaluar un criterio, dilo y no lo supongas.
 >
 > Oferta:
 > [pega el texto]
@@ -164,8 +180,13 @@ Los datos entre corchetes son marcadores: se sustituyen por los datos reales ant
 - El modelo sabe a quién va dirigida la oferta y puede comprobar si encaja.
 - Pedir la frase exacta obliga a señalar el problema en el texto, no en abstracto.
 - El criterio de promesas protege frente a resultados garantizados, un riesgo real en coaching.
+- El criterio 5 evita que se pase por alto la falta de datos de confianza, que la versión vaga sí detectó.
 
-**Prueba:** pendiente, con una oferta breve que tenga dos errores conocidos.
+**Prueba** (con una oferta ficticia que promete "8 kilos en 6 semanas" y no indica precio)
+
+- **Versión vaga:** detectó la promesa de resultado garantizado y explicó el riesgo. Revisó más huecos que la versión mejorada, como titulación, políticas de cancelación y canal de contacto. Añadió consideraciones legales sin verificarlas, que hay que comprobar antes de citarlas.
+- **Versión mejorada:** pidió los datos que faltaban antes de empezar. Evaluó los criterios que podía y citó frases exactas. No revisó titulación, políticas ni canal de contacto, porque el prompt no lo pedía. Por eso se añadió el criterio 5.
+- **Pendiente:** repetir con el criterio 5 para comprobar que ahora sí detecta esos datos.
 
 ---
 
@@ -174,3 +195,4 @@ Los datos entre corchetes son marcadores: se sustituyen por los datos reales ant
 - Los datos y las reglas importan más que el rol. El rol fija el tono, pero no sustituye a la información.
 - Un prompt concreto se puede comprobar. Si no puedo verificar la respuesta, el prompt aún no está terminado.
 - Pedir al modelo que diga qué datos le faltan es tan útil como pedirle la respuesta.
+- Una prueba vale más cuando anotas también los fallos de la versión mejorada, no solo sus aciertos.
