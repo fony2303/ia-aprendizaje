@@ -72,7 +72,6 @@ Los datos entre corchetes son marcadores: se sustituyen por los datos reales ant
 
 - **Versión vaga:** calcula bien los totales y las medias por trabajadora. Se equivoca en la media de NPS de Nei (8,2 en vez de 8,06). No avisa de que falta la columna de servicio.
 - **Versión mejorada (versión anterior al cambio):** calcula bien los totales. Tiene el mismo fallo en la media de Nei. Avisa de que no hay columna de servicio y no inventa el NPS del domingo de Bea.
-- **Pendiente:** repetir con el prompt ya actualizado para comprobar si el cálculo de medias mejora.
 
 ---
 
@@ -186,7 +185,6 @@ Los datos entre corchetes son marcadores: se sustituyen por los datos reales ant
 
 - **Versión vaga:** detectó la promesa de resultado garantizado y explicó el riesgo. Revisó más huecos que la versión mejorada, como titulación, políticas de cancelación y canal de contacto. Añadió consideraciones legales sin verificarlas, que hay que comprobar antes de citarlas.
 - **Versión mejorada:** pidió los datos que faltaban antes de empezar. Evaluó los criterios que podía y citó frases exactas. No revisó titulación, políticas ni canal de contacto, porque el prompt no lo pedía. Por eso se añadió el criterio 5.
-- **Pendiente:** repetir con el criterio 5 para comprobar que ahora sí detecta esos datos.
 
 ---
 
